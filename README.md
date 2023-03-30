@@ -1,6 +1,6 @@
-# ContratStageRh
+# Angular Products App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.11.
+This angular application is written for learning purpose following Professeur Mohamed YOUSSFI angular course : `https://www.youtube.com/watch?v=zT_nQ2oNeRM&list=PLxr551TUsmAo457BgKV4dTzF__SUS5knW`.
 
 ## Development server
 
