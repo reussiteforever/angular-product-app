@@ -1,12 +1,22 @@
 <div class="container">
     <ng-template #errors>
-        <div class="text-danger">{{errorMessage}}</div> 
+        <div class="text-danger">{{errorMessage}}</div>
     </ng-template>
     <div class="card" *ngIf="products; else errors">
         <div class="card-header">
             Products List
         </div>
         <div class="card-body">
+            <!-- formulaire de recherche -->
+            <form [formGroup]="searchFormGroup" (ngSubmit)="handleSearchProducts()">
+                <div class="input-group">
+                    <label class="input-group-text">Mot clés:</label>
+                    <input type="text" class="form-control" formControlName="keyword">
+                    <button class="btn btn-info">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
             <table class="table">
                 <thead>
                     <tr>
@@ -20,6 +30,13 @@
                         <td>{{p.id}}</td>
                         <td>{{p.name}}</td>
                         <td>{{p.price}}</td>
+                        <td><i *ngIf="p.promotion" class="bi bi-heart-fill text-success"></i></td>
+                        <td>
+                            <button (click)="handleSetPromotion(p)" [ngClass]="p.promotion ? 'btn-danger' : 'btn-success'" class="btn">
+                                <span *ngIf="p.promotion">Promo On</span>
+                                <span *ngIf="!p.promotion">Promo Off</span>
+                            </button>
+                        </td>
                         <td>
                             <button (click)="handleDeleteProduct(p)" class="btn btn-danger">
                                 <i class="bi bi-trash"></i>
@@ -28,6 +45,12 @@
                     </tr>
                 </tbody>
             </table>
+            <!-- Pagination part Started -->
+            <ul class="nav nav-pills">
+                <li *ngFor="let item of [].constructor(totalPages); let i=index">
+                    <a (click)="goToPage(i)" [ngClass]="i==currentPage?'btn-info':'btn-outline-info'" class="btn mt-1 ms-1"> {{i}} </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
