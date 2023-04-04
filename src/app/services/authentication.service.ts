@@ -9,7 +9,7 @@ import { AppUser } from '../model/user.model';
 export class AuthenticationService {
 
   users: AppUser[]=[];
-  authenticatedUser!: AppUser;
+  authenticatedUser: AppUser | undefined;
 
   
 
@@ -35,10 +35,16 @@ export class AuthenticationService {
   }
 
   public hasRole(role: string): boolean {
-    return this.authenticatedUser.roles.includes(role);
+    return this.authenticatedUser!.roles.includes(role);
   }
 
   public isAuthenticated(){
     return this.authenticatedUser != undefined; 
+  }
+
+  public logout(): Observable<boolean>{
+    this.authenticatedUser = undefined;
+    localStorage.removeItem("authUser");
+    return of(true);
   }
 }

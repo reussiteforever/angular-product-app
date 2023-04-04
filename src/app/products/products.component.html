@@ -31,13 +31,13 @@
                         <td>{{p.name}}</td>
                         <td>{{p.price}}</td>
                         <td><i *ngIf="p.promotion" class="bi bi-heart-fill text-success"></i></td>
-                        <td>
+                        <td *ngIf="authService.hasRole('ADMIN')">
                             <button (click)="handleSetPromotion(p)" [ngClass]="p.promotion ? 'btn-danger' : 'btn-success'" class="btn">
                                 <span *ngIf="p.promotion">Promo On</span>
                                 <span *ngIf="!p.promotion">Promo Off</span>
                             </button>
                         </td>
-                        <td>
+                        <td *ngIf="authService.hasRole('ADMIN')">
                             <button (click)="handleDeleteProduct(p)" class="btn btn-danger">
                                 <i class="bi bi-trash"></i>
                             </button>
